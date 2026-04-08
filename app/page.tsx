@@ -1,65 +1,151 @@
-import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/Header";
+import HomeCatalog from "@/components/HomeCatalog";
+import HeroMotifField from "@/components/HeroMotifField";
+import { categories } from "@/data/categories";
 
 export default function Home() {
+  const totalBlocks = categories.reduce((sum, category) => sum + category.count, 0);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Header />
+
+      <main style={{ maxWidth: 1160, margin: "0 auto", padding: "0 clamp(18px, 4vw, 32px)" }}>
+        <section
+          style={{
+            position: "relative",
+            padding: "94px 0 54px",
+            textAlign: "center",
+            animation: "fadeUp .65s cubic-bezier(.16,1,.3,1) backwards",
+            isolation: "isolate",
+          }}
+        >
+          <HeroMotifField />
+
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <h1
+              style={{
+                fontFamily: "var(--font-display)",
+                fontSize: "clamp(64px, 11vw, 132px)",
+                fontWeight: 800,
+                lineHeight: 0.88,
+                letterSpacing: "-0.08em",
+                color: "var(--text)",
+                maxWidth: 940,
+                margin: "0 auto 18px",
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Patterns to
+              <br />
+              shape the screen
+            </h1>
+
+            <p
+              style={{
+                maxWidth: 760,
+                margin: "0 auto 22px",
+                fontFamily: "var(--font-body)",
+                fontSize: "clamp(18px, 2.1vw, 24px)",
+                fontWeight: 500,
+                lineHeight: 1.45,
+                color: "var(--muted)",
+              }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              A focused catalog of interface references for designers and frontend teams building calmer, sharper products.
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 10,
+                flexWrap: "wrap",
+              }}
+            >
+              <Link
+                href="/#catalog"
+                style={{
+                  textDecoration: "none",
+                  border: "1px solid var(--border)",
+                  color: "var(--text)",
+                  background: "var(--surface)",
+                  borderRadius: 16,
+                  padding: "10px 16px",
+                  fontFamily: "var(--font-body)",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {categories.length} categories
+              </Link>
+
+              <Link
+                href="/category/ui-components"
+                style={{
+                  textDecoration: "none",
+                  border: "1px solid var(--border)",
+                  color: "var(--text)",
+                  background: "var(--surface)",
+                  borderRadius: 16,
+                  padding: "10px 16px",
+                  fontFamily: "var(--font-body)",
+                  fontSize: 15,
+                  fontWeight: 600,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {totalBlocks}+ blocks
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        <HomeCatalog categories={categories} />
       </main>
-    </div>
+
+      <footer style={{ padding: "0 0 32px" }}>
+        <div
+          style={{
+            maxWidth: 1160,
+            margin: "0 auto",
+            padding: "22px clamp(18px, 4vw, 32px) 0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 12,
+            flexWrap: "wrap",
+            borderTop: "1px solid var(--border)",
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 14,
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              color: "var(--text)",
+            }}
+          >
+            motiff
+          </span>
+
+          <Link
+            href="/about"
+            style={{
+              textDecoration: "none",
+              fontFamily: "var(--font-body)",
+              fontSize: 14,
+              fontWeight: 600,
+              color: "var(--muted)",
+            }}
+          >
+            About
+          </Link>
+        </div>
+      </footer>
+    </>
   );
 }

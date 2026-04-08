@@ -1,0 +1,148 @@
+export type CategoryFamily = "foundations" | "systems" | "components" | "motion";
+
+export interface Category {
+  id: string;
+  slug: string;
+  title: string;
+  count: number;
+  thumbType: string;
+  family: CategoryFamily;
+  summary: string;
+  highlight: string;
+  featuredTags: string[];
+}
+
+export const categories: Category[] = [
+  {
+    id: "01",
+    slug: "color-systems",
+    title: "Color Systems",
+    count: 8,
+    thumbType: "color",
+    family: "foundations",
+    summary: "Keeps palettes, neutrals, and semantic state colors in one place.",
+    highlight: "Tokens first",
+    featuredTags: ["palette", "semantic", "a11y"],
+  },
+  {
+    id: "02",
+    slug: "typography",
+    title: "Typography",
+    count: 6,
+    thumbType: "type",
+    family: "foundations",
+    summary: "Turns display, body, and mono styles into a readable hierarchy.",
+    highlight: "Readable hierarchy",
+    featuredTags: ["scale", "fonts", "responsive"],
+  },
+  {
+    id: "03",
+    slug: "grid-layout",
+    title: "Grid & Layout",
+    count: 9,
+    thumbType: "grid",
+    family: "systems",
+    summary: "Speeds up page structure, column logic, and layout decisions across screens.",
+    highlight: "Structure engine",
+    featuredTags: ["12-col", "masonry", "dashboard"],
+  },
+  {
+    id: "04",
+    slug: "ui-components",
+    title: "UI Components",
+    count: 14,
+    thumbType: "ui",
+    family: "components",
+    summary: "Packages CTA, badge, modal, toggle, and more as reusable blocks.",
+    highlight: "High reuse",
+    featuredTags: ["cta", "modal", "toggle"],
+  },
+  {
+    id: "05",
+    slug: "icon-systems",
+    title: "Icon Systems",
+    count: 5,
+    thumbType: "icons",
+    family: "systems",
+    summary: "Core pieces for building, aligning, and tuning icon sets.",
+    highlight: "Consistent shape language",
+    featuredTags: ["stroke", "set", "symbol"],
+  },
+  {
+    id: "06",
+    slug: "spacing-sizing",
+    title: "Spacing & Sizing",
+    count: 4,
+    thumbType: "spacing",
+    family: "foundations",
+    summary: "Builds visual rhythm across screens with spacing and sizing tokens.",
+    highlight: "Visual rhythm",
+    featuredTags: ["spacing", "scale", "tokens"],
+  },
+  {
+    id: "07",
+    slug: "motion-animation",
+    title: "Motion & Animation",
+    count: 7,
+    thumbType: "motion",
+    family: "motion",
+    summary: "Makes transitions, easing curves, and loading states feel sharper.",
+    highlight: "Delight layer",
+    featuredTags: ["easing", "loading", "transition"],
+  },
+  {
+    id: "08",
+    slug: "form-patterns",
+    title: "Form Patterns",
+    count: 8,
+    thumbType: "form",
+    family: "components",
+    summary: "Turns inputs, helper text, and validation into clear form surfaces.",
+    highlight: "Clear input states",
+    featuredTags: ["form", "input", "validation"],
+  },
+  {
+    id: "09",
+    slug: "navigation",
+    title: "Navigation",
+    count: 6,
+    thumbType: "nav",
+    family: "components",
+    summary: "Shapes navbar, sidebar, and bottom-nav surfaces with consistency.",
+    highlight: "Wayfinding",
+    featuredTags: ["nav", "sidebar", "tabs"],
+  },
+  {
+    id: "10",
+    slug: "dark-mode",
+    title: "Dark Mode",
+    count: 5,
+    thumbType: "dark",
+    family: "foundations",
+    summary: "Keeps light, contrast, and theme balance under control.",
+    highlight: "Contrast safe",
+    featuredTags: ["theme", "contrast", "dual-mode"],
+  },
+  {
+    id: "11",
+    slug: "card-design",
+    title: "Card Design",
+    count: 8,
+    thumbType: "cards",
+    family: "components",
+    summary: "Reusable patterns for content and product cards with tuned density.",
+    highlight: "Information density",
+    featuredTags: ["cards", "content", "commerce"],
+  },
+  {
+    id: "12",
+    slug: "data-visualization",
+    title: "Data Visualization",
+    count: 6,
+    thumbType: "data",
+    family: "systems",
+    summary: "Charts and metric layouts for dashboards and reporting surfaces.",
+    highlight: "Decision surfaces",
+    featuredTags: ["charts", "metrics", "dashboard"],
+  },
+];
