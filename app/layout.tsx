@@ -15,14 +15,17 @@ const jetbrains = JetBrains_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-const siteTitle = "Motiff — Interface Pattern Catalog";
-const siteDescription = "A focused catalog of interface references for designers and frontend teams building calmer, sharper products.";
+const metadataBaseUrl = siteUrl ?? "https://motiff-alpha.vercel.app";
+const siteTitle = "Motiff - Interface Pattern Catalog";
+const siteDescription =
+  "A focused catalog of interface references for designers and frontend teams building calmer, sharper products.";
+const siteImage = "/opengraph-image";
 
 export const metadata: Metadata = {
-  metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+  metadataBase: new URL(metadataBaseUrl),
   title: {
     default: siteTitle,
-    template: "%s — Motiff",
+    template: "%s - Motiff",
   },
   description: siteDescription,
   openGraph: {
@@ -30,11 +33,20 @@ export const metadata: Metadata = {
     description: siteDescription,
     siteName: "Motiff",
     type: "website",
+    images: [
+      {
+        url: siteImage,
+        width: 1200,
+        height: 630,
+        alt: "Motiff preview-first interface catalog",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
+    images: [siteImage],
   },
   icons: {
     icon: "/icon.svg",
