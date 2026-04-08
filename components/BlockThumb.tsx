@@ -859,8 +859,33 @@ export const blockThumbMap: Record<string, () => React.ReactElement> = {
   v6: ThumbHeatmap,
 };
 
-export default function BlockThumb({ blockId }: { blockId: string }) {
+export default function BlockThumb({
+  blockId,
+  zoom = 1,
+  offsetX = "50%",
+  offsetY = "50%",
+}: {
+  blockId: string;
+  zoom?: number;
+  offsetX?: string;
+  offsetY?: string;
+}) {
   const Thumb = blockThumbMap[blockId];
   if (!Thumb) return <div style={{ height:"100%", background:"#F4F4F4" }} />;
-  return <Thumb />;
+
+  return (
+    <div style={{ height: "100%", overflow: "hidden" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          transform: `scale(${zoom})`,
+          transformOrigin: `${offsetX} ${offsetY}`,
+          willChange: "transform",
+        }}
+      >
+        <Thumb />
+      </div>
+    </div>
+  );
 }

@@ -151,7 +151,7 @@ export default async function BlockPreviewPage({
                 boxShadow: "0 40px 100px rgba(17,17,17,0.12)",
               }}
             >
-              <BlockThumb blockId={block.id} />
+              <BlockThumb blockId={block.id} zoom={1.28} offsetY="44%" />
             </div>
           </div>
         </section>
