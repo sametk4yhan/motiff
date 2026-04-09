@@ -5,7 +5,6 @@ import HeroMotifField from "@/components/HeroMotifField";
 import { categories } from "@/data/categories";
 
 export default function Home() {
-  const totalBlocks = categories.reduce((sum, category) => sum + category.count, 0);
 
   return (
     <>
@@ -97,7 +96,7 @@ export default function Home() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                {totalBlocks}+ blocks
+                Growing catalog
               </Link>
             </div>
           </div>

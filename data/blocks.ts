@@ -15,7 +15,7 @@ export const blocksByCategory: Record<string, Block[]> = {
   --color-200: #FAC08A;
   --color-300: #F59A52;
   --color-400: #E8782A;
-  --color-500: #C4640A; /* ana */
+  --color-500: #C4640A; /* primary */
   --color-600: #A35208;
   --color-700: #7A3D06;
   --color-800: #522904;
@@ -42,11 +42,11 @@ export const blocksByCategory: Record<string, Block[]> = {
   --color-warning:     #F59E0B;
   --color-warning-bg:  rgba(245, 158, 11, 0.10);
 
-  /* Hata */
+  /* Error */
   --color-error:       #EF4444;
   --color-error-bg:    rgba(239, 68, 68, 0.10);
 
-  /* Bilgi */
+  /* Info */
   --color-info:        #3B82F6;
   --color-info-bg:     rgba(59, 130, 246, 0.10);
 }` },
@@ -76,31 +76,31 @@ export const blocksByCategory: Record<string, Block[]> = {
 .grad-neutral { background: linear-gradient(135deg, #3A3836, #7A7876); }
 .grad-soft    { background: linear-gradient(135deg, #F2EDE4, #E4D8C8); }` },
     { id: "r6", title: "Accessibility Contrast", description: "WCAG AA/AAA compliant color pair table.", tags: ["A11y", "CSS"], lang: "css", code: `/* WCAG AA -> min contrast 4.5:1 (normal text) */
-/* WCAG AAA → min kontrast 7:1   (normal metin) */
+/* WCAG AAA → min contrast 7:1   (normal text) */
 
-/* ✅ AAA uyumlu kombinasyonlar */
+/* ✅ AAA compliant combinations */
 .text-on-white  { color: #1C1A17; } /* 16.8:1 */
 .text-on-light  { color: #3A3836; } /* 10.2:1 */
 .accent-on-white { color: #8A3A06; } /* 7.1:1 */
 
-/* ✅ AA uyumlu */
+/* ✅ AA compliant */
 .accent-normal  { color: #C4640A; } /* 4.6:1 on white */
 
-/* ❌ Yetersiz (kullanma) */
+/* ❌ Insufficient (avoid) */
 /* color: #E8A050 on white → 2.4:1 */` },
     { id: "r7", title: "Brand Color System", description: "A complete hierarchy for primary, secondary, and accent colors.", tags: ["Brand", "CSS"], lang: "css", code: `:root {
   /* Primary - trust, authority */
   --brand-primary:   #C4640A;
   --brand-primary-2: #A35208;
 
-  /* Secondary — denge, destek */
+  /* Secondary — balance and support */
   --brand-secondary:   #2A5A6A;
   --brand-secondary-2: #1A3A4A;
 
   /* Accent - attention */
   --brand-accent: #8A3A6A;
 
-  /* Neutral zemin */
+  /* Neutral surface */
   --brand-bg:      #F8F7F4;
   --brand-surface: #FFFFFF;
   --brand-border:  #E4E0D8;
@@ -198,13 +198,13 @@ pre {
   padding: 0.15em 0.4em;
   border-radius: 0.25em;
 }` },
-    { id: "t5", title: "Responsive Typography", description: "Fluid font sizes with clamp() for all screens.", tags: ["Responsive", "CSS"], lang: "css", code: `/* clamp(min, tercih, maks) */
+    { id: "t5", title: "Responsive Typography", description: "Fluid font sizes with clamp() for all screens.", tags: ["Responsive", "CSS"], lang: "css", code: `/* clamp(min, preferred, max) */
 h1 { font-size: clamp(2.5rem, 6vw, 6rem);   }
 h2 { font-size: clamp(2rem,   4vw, 3.75rem); }
 h3 { font-size: clamp(1.5rem, 3vw, 2.5rem);  }
 p  { font-size: clamp(1rem,   1.5vw, 1.125rem); }
 
-/* Alternatif: fluid spacing */
+/* Alternative: fluid spacing */
 .section {
   padding: clamp(2rem, 5vw, 6rem) clamp(1rem, 5vw, 2rem);
 }` },
@@ -366,7 +366,7 @@ footer  { grid-area: footer;  }
   ],
 
   "ui-components": [
-    { id: "u1", title: "Button Family", description: "Primary, secondary, ghost, destructive varyantlar.", tags: ["Buton", "CSS"], lang: "css", code: `.btn {
+    { id: "u1", title: "Button Family", description: "Primary, secondary, ghost, destructive variants.", tags: ["Button", "CSS"], lang: "css", code: `.btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.5rem 1.25rem; border-radius: 0.5rem;
   font-size: 0.875rem; font-weight: 500; cursor: pointer;
@@ -466,7 +466,7 @@ dialog::backdrop { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
   </button>
   <ul class="dropdown-menu" role="menu">
     <li role="menuitem"><a href="#">Profile</a></li>
-    <li role="menuitem"><a href="#">Ayarlar</a></li>
+    <li role="menuitem"><a href="#">Settings</a></li>
     <li class="dropdown-divider"></li>
     <li role="menuitem"><a href="#" class="text-error">Sign out</a></li>
   </ul>
@@ -666,12 +666,12 @@ details[open] .accordion-icon { transform: rotate(45deg); }
   <div class="cmd-box">
     <div class="cmd-input-wrap">
       <span>⌘</span>
-      <input class="cmd-input" placeholder="Ara veya komut gir..." />
+      <input class="cmd-input" placeholder="Search or type a command..." />
     </div>
     <ul class="cmd-results">
       <li class="cmd-item">Home</li>
-      <li class="cmd-item cmd-active">Ayarlar</li>
-      <li class="cmd-item">Belgeler</li>
+      <li class="cmd-item cmd-active">Settings</li>
+      <li class="cmd-item">Documents</li>
     </ul>
   </div>
 </div>
@@ -967,7 +967,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   <div class="input-group">
     <label class="input-label">Password</label>
     <input class="input" type="password" />
-    <span class="input-hint">En az 8 karakter</span>
+    <span class="input-hint">At least 8 characters</span>
   </div>
   <label class="toggle">
     <input type="checkbox" class="toggle-input" />
@@ -980,12 +980,12 @@ document.querySelectorAll('.reveal').forEach(el => {
 <style>
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 </style>` },
-    { id: "f3", title: "Search Bar", description: "Autocomplete search input design.", tags: ["Arama", "HTML"], lang: "html", code: `<div class="search-wrap">
+    { id: "f3", title: "Search Bar", description: "Autocomplete search input design.", tags: ["Search", "HTML"], lang: "html", code: `<div class="search-wrap">
   <div class="search-bar">
     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input class="search-input" type="search" placeholder="Ara..." />
+    <input class="search-input" type="search" placeholder="Search..." />
     <kbd class="search-kbd">⌘K</kbd>
   </div>
 </div>
@@ -1013,7 +1013,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   </div>
   <div class="form-row">
     <div class="input-group">
-      <label class="input-label">Son Kullanma</label>
+      <label class="input-label">Expiry Date</label>
       <input class="input" type="text" placeholder="AA/YY" maxlength="5" />
     </div>
     <div class="input-group">
@@ -1023,7 +1023,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   </div>
   <div class="input-group">
     <label class="input-label">Name on card</label>
-    <input class="input" type="text" placeholder="AD SOYAD" />
+    <input class="input" type="text" placeholder="FULL NAME" />
   </div>
   <button class="btn btn-primary" style="width:100%">
     🔒 Pay securely
@@ -1037,7 +1037,7 @@ document.querySelectorAll('.reveal').forEach(el => {
       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
     </svg>
     <span>Drag files or <u>select</u></span>
-    <small>PNG, JPG, PDF — maks 10MB</small>
+    <small>PNG, JPG, PDF — max 10MB</small>
   </label>
 </div>
 
@@ -1656,7 +1656,7 @@ function applyTheme(theme) {
     stroke-linecap="round"
     transform="rotate(-90 60 60)"
   />
-  <!-- Merkez metin -->
+  <!-- Center text -->
   <text x="60" y="65" text-anchor="middle"
     font-family="var(--font-display)" font-size="18" fill="var(--text)">67%</text>
 </svg>` },

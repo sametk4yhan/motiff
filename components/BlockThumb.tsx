@@ -146,7 +146,7 @@ function ThumbKodBlok() {
   return <div style={{ ...s, padding:"18px 22px", display:"flex", flexDirection:"column", gap:5, justifyContent:"center" }}>
     <div style={{ background:"#111111", borderRadius:8, padding:"14px 16px", display:"flex", flexDirection:"column", gap:5 }}>
       <span style={{ fontFamily:"var(--font-mono)", fontSize:9, color:"#6B6B6B" }}>{"const greet = (name) => {"}</span>
-      <span style={{ fontFamily:"var(--font-mono)", fontSize:9, color:"#9AA8C8", paddingLeft:12 }}>{"return `Merhaba, ${name}`"}</span>
+      <span style={{ fontFamily:"var(--font-mono)", fontSize:9, color:"#9AA8C8", paddingLeft:12 }}>{"return `Hello, ${name}`"}</span>
       <span style={{ fontFamily:"var(--font-mono)", fontSize:9, color:"#6B6B6B" }}>{"}"}</span>
     </div>
   </div>;
@@ -319,7 +319,7 @@ function ThumbButonAilesi() {
     </div>
     <div style={{ display:"flex", gap:6 }}>
       <div style={{ ...ms, padding:"5px 12px", borderRadius:5, border:`1px solid ${T.border}`, color:T.muted }}>Ghost</div>
-      <div style={{ ...ms, padding:"5px 12px", borderRadius:5, background:"#EF4444", color:"#fff", opacity:.85 }}>Sil</div>
+      <div style={{ ...ms, padding:"5px 12px", borderRadius:5, background:"#EF4444", color:"#fff", opacity:.85 }}>Delete</div>
     </div>
   </div>;
 }
@@ -327,11 +327,11 @@ function ThumbButonAilesi() {
 function ThumbInput() {
   return <div style={{ ...s, padding:"16px 20px", display:"flex", flexDirection:"column", gap:8, justifyContent:"center" }}>
     <div>
-      <div style={{ fontFamily:"var(--font-mono)", fontSize:8, color:T.muted, marginBottom:3 }}>AD SOYAD</div>
+      <div style={{ fontFamily:"var(--font-mono)", fontSize:8, color:T.muted, marginBottom:3 }}>FULL NAME</div>
       <div style={{ height:24, border:`1px solid ${T.accent}`, borderRadius:5 }} />
     </div>
     <div>
-      <div style={{ fontFamily:"var(--font-mono)", fontSize:8, color:T.muted, marginBottom:3 }}>E-POSTA</div>
+      <div style={{ fontFamily:"var(--font-mono)", fontSize:8, color:T.muted, marginBottom:3 }}>EMAIL</div>
       <div style={{ height:24, border:`1px solid ${T.border}`, borderRadius:5 }} />
     </div>
     <div style={{ height:40, border:`1px solid ${T.border}`, borderRadius:5 }} />
@@ -431,7 +431,7 @@ function ThumbLogin() {
   return <div style={{ ...s, display:"flex", justifyContent:"center", alignItems:"center" }}>
     <div style={{ width:"78%", background:"#fff", border:`1px solid ${T.border}`, borderRadius:10, padding:"16px 18px", boxShadow:"0 4px 14px rgba(0,0,0,.06)" }}>
       <div style={{ height:7, background:T.text, borderRadius:2, width:"50%", marginBottom:12, opacity:.7 }} />
-      <div style={{ fontFamily:"var(--font-mono)", fontSize:7, color:T.muted, marginBottom:3 }}>E-POSTA</div>
+      <div style={{ fontFamily:"var(--font-mono)", fontSize:7, color:T.muted, marginBottom:3 }}>EMAIL</div>
       <div style={{ height:20, border:`1px solid ${T.border}`, borderRadius:5, marginBottom:8 }} />
       <div style={{ fontFamily:"var(--font-mono)", fontSize:7, color:T.muted, marginBottom:3 }}>PASSWORD</div>
       <div style={{ height:20, border:`1px solid ${T.border}`, borderRadius:5, marginBottom:10 }} />
