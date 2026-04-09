@@ -689,6 +689,480 @@ details[open] .accordion-icon { transform: rotate(45deg); }
 .cmd-item { padding: 0.75rem 1rem; cursor: pointer; }
 .cmd-item:hover, .cmd-active { background: var(--border); }
 </style>` },
+    {
+      id: "u15",
+      title: "Checkbox Group",
+      description: "Styled checkbox inputs with label and indeterminate state.",
+      tags: ["Checkbox", "HTML"],
+      lang: "html",
+      code: `<fieldset class="checkbox-group">
+  <legend class="input-label">Notifications</legend>
+
+  <label class="checkbox-item">
+    <input type="checkbox" class="checkbox-input" checked />
+    <span class="checkbox-box"></span>
+    <span class="checkbox-label">Email notifications</span>
+  </label>
+
+  <label class="checkbox-item">
+    <input type="checkbox" class="checkbox-input" />
+    <span class="checkbox-box"></span>
+    <span class="checkbox-label">Push notifications</span>
+  </label>
+
+  <label class="checkbox-item">
+    <input type="checkbox" class="checkbox-input" disabled />
+    <span class="checkbox-box"></span>
+    <span class="checkbox-label checkbox-disabled">SMS (unavailable)</span>
+  </label>
+</fieldset>
+
+<style>
+.checkbox-group { border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.checkbox-item { display: flex; align-items: center; gap: 0.625rem; cursor: pointer; }
+.checkbox-input { position: absolute; opacity: 0; width: 0; height: 0; }
+.checkbox-box {
+  width: 1.125rem; height: 1.125rem; border-radius: 0.3rem;
+  border: 1.5px solid var(--border); background: var(--surface);
+  flex-shrink: 0; transition: all 0.15s; position: relative;
+}
+.checkbox-input:checked + .checkbox-box {
+  background: var(--accent); border-color: var(--accent);
+}
+.checkbox-input:checked + .checkbox-box::after {
+  content: ''; position: absolute; top: 2px; left: 5px;
+  width: 4px; height: 8px; border: 2px solid #fff;
+  border-top: none; border-left: none; transform: rotate(45deg);
+}
+.checkbox-input:focus-visible + .checkbox-box { box-shadow: 0 0 0 3px var(--accent-dim); }
+.checkbox-input:disabled + .checkbox-box { opacity: 0.4; cursor: not-allowed; }
+.checkbox-label { font-size: 0.9375rem; }
+.checkbox-disabled { color: var(--muted); }
+</style>`,
+    },
+
+    {
+      id: "u16",
+      title: "Radio Group",
+      description: "Radio button group with custom styling.",
+      tags: ["Radio", "HTML"],
+      lang: "html",
+      code: `<fieldset class="radio-group">
+  <legend class="input-label">Plan</legend>
+
+  <label class="radio-item">
+    <input type="radio" name="plan" class="radio-input" value="free" checked />
+    <span class="radio-circle"></span>
+    <div class="radio-content">
+      <span class="radio-label">Free</span>
+      <span class="radio-desc">Up to 3 projects</span>
+    </div>
+  </label>
+
+  <label class="radio-item">
+    <input type="radio" name="plan" class="radio-input" value="pro" />
+    <span class="radio-circle"></span>
+    <div class="radio-content">
+      <span class="radio-label">Pro — $12/mo</span>
+      <span class="radio-desc">Unlimited projects, priority support</span>
+    </div>
+  </label>
+
+  <label class="radio-item">
+    <input type="radio" name="plan" class="radio-input" value="team" />
+    <span class="radio-circle"></span>
+    <div class="radio-content">
+      <span class="radio-label">Team — $49/mo</span>
+      <span class="radio-desc">Everything in Pro, plus team management</span>
+    </div>
+  </label>
+</fieldset>
+
+<style>
+.radio-group { border: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.radio-item {
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  padding: 0.875rem 1rem; border: 1px solid var(--border);
+  border-radius: 0.625rem; cursor: pointer; transition: border-color 0.15s;
+}
+.radio-item:has(.radio-input:checked) { border-color: var(--accent); background: var(--accent-dim); }
+.radio-input { position: absolute; opacity: 0; width: 0; height: 0; }
+.radio-circle {
+  width: 1.125rem; height: 1.125rem; border-radius: 50%;
+  border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 2px;
+  position: relative; transition: all 0.15s;
+}
+.radio-item:has(.radio-input:checked) .radio-circle { border-color: var(--accent); }
+.radio-item:has(.radio-input:checked) .radio-circle::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.radio-content { display: flex; flex-direction: column; gap: 0.125rem; }
+.radio-label { font-size: 0.875rem; font-weight: 500; }
+.radio-desc { font-size: 0.8125rem; color: var(--muted); }
+</style>`,
+    },
+
+    {
+      id: "u17",
+      title: "Slider / Range Input",
+      description: "Custom styled range slider with value display.",
+      tags: ["Slider", "HTML"],
+      lang: "html",
+      code: `<div class="slider-group">
+  <div class="slider-header">
+    <label class="input-label">Volume</label>
+    <span class="slider-value" id="sliderVal">72</span>
+  </div>
+  <input
+    type="range" class="slider" id="slider"
+    min="0" max="100" value="72"
+    oninput="document.getElementById('sliderVal').textContent = this.value"
+  />
+  <div class="slider-ticks">
+    <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+  </div>
+</div>
+
+<style>
+.slider-group { display: flex; flex-direction: column; gap: 0.625rem; }
+.slider-header { display: flex; justify-content: space-between; align-items: center; }
+.slider-value { font-size: 0.875rem; font-weight: 600; color: var(--accent); }
+.slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px; border-radius: 9999px;
+  background: linear-gradient(to right, var(--accent) 72%, var(--border) 72%);
+  outline: none; cursor: pointer;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 1.125rem; height: 1.125rem; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--surface);
+  box-shadow: 0 0 0 2px var(--accent);
+  transition: transform 0.15s;
+}
+.slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.slider-ticks { display: flex; justify-content: space-between; font-size: 0.6875rem; color: var(--muted); }
+</style>`,
+    },
+
+    {
+      id: "u18",
+      title: "Pagination",
+      description: "Page navigation with prev/next and numbered steps.",
+      tags: ["Pagination", "HTML"],
+      lang: "html",
+      code: `<nav class="pagination" aria-label="Pagination">
+  <button class="page-btn page-prev" aria-label="Previous">← Prev</button>
+
+  <div class="page-numbers">
+    <button class="page-num">1</button>
+    <button class="page-num active" aria-current="page">2</button>
+    <button class="page-num">3</button>
+    <span class="page-ellipsis">...</span>
+    <button class="page-num">8</button>
+  </div>
+
+  <button class="page-btn page-next">Next →</button>
+</nav>
+
+<style>
+.pagination { display: flex; align-items: center; gap: 0.5rem; }
+.page-numbers { display: flex; align-items: center; gap: 0.25rem; }
+.page-btn {
+  padding: 0.5rem 0.875rem; border: 1px solid var(--border);
+  border-radius: 0.5rem; background: var(--surface); color: var(--text);
+  font-size: 0.875rem; cursor: pointer; transition: all 0.15s;
+}
+.page-btn:hover { border-color: var(--accent); color: var(--accent); }
+.page-num {
+  width: 2.25rem; height: 2.25rem; border-radius: 0.5rem;
+  border: 1px solid transparent; background: none;
+  font-size: 0.875rem; cursor: pointer; color: var(--text);
+  transition: all 0.15s;
+}
+.page-num:hover { background: var(--border); }
+.page-num.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 600; }
+.page-ellipsis { color: var(--muted); padding: 0 0.25rem; font-size: 0.875rem; }
+</style>`,
+    },
+
+    {
+      id: "u19",
+      title: "Stepper",
+      description: "Numeric stepper input with increment and decrement controls.",
+      tags: ["Stepper", "HTML"],
+      lang: "html",
+      code: `<div class="stepper-group">
+  <label class="input-label">Quantity</label>
+  <div class="stepper">
+    <button class="stepper-btn" onclick="stepChange(-1)" aria-label="Decrease">−</button>
+    <input class="stepper-input" id="stepVal" type="number" value="1" min="0" max="99" readonly />
+    <button class="stepper-btn" onclick="stepChange(1)" aria-label="Increase">+</button>
+  </div>
+</div>
+
+<style>
+.stepper-group { display: flex; flex-direction: column; gap: 0.5rem; width: fit-content; }
+.stepper {
+  display: flex; align-items: center;
+  border: 1px solid var(--border); border-radius: 0.5rem;
+  overflow: hidden; background: var(--surface);
+}
+.stepper-btn {
+  width: 2.5rem; height: 2.5rem; border: none; background: none;
+  font-size: 1.125rem; cursor: pointer; color: var(--text);
+  transition: background 0.15s; flex-shrink: 0;
+}
+.stepper-btn:hover { background: var(--border); }
+.stepper-input {
+  width: 3rem; text-align: center; border: none;
+  border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+  background: none; font-size: 0.9375rem; font-weight: 500;
+  color: var(--text); padding: 0.5rem 0; outline: none;
+}
+.stepper-input::-webkit-inner-spin-button { display: none; }
+</style>
+
+<script>
+function stepChange(dir) {
+  const input = document.getElementById('stepVal');
+  const val = parseInt(input.value) + dir;
+  if (val >= 0 && val <= 99) input.value = val;
+}
+</script>`,
+    },
+
+    {
+      id: "u20",
+      title: "Tag Input",
+      description: "Multi-value tag input with add and remove functionality.",
+      tags: ["Tags", "HTML"],
+      lang: "html",
+      code: `<div class="tag-input-wrap">
+  <label class="input-label">Tags</label>
+  <div class="tag-input-box" id="tagBox" onclick="document.getElementById('tagInput').focus()">
+    <span class="tag-pill">Design <button onclick="removeTag(this)" class="tag-remove">×</button></span>
+    <span class="tag-pill">CSS <button onclick="removeTag(this)" class="tag-remove">×</button></span>
+    <input
+      class="tag-input" id="tagInput" type="text"
+      placeholder="Add tag..." maxlength="24"
+      onkeydown="handleTagKey(event)"
+    />
+  </div>
+  <p class="input-hint">Press Enter or comma to add a tag</p>
+</div>
+
+<style>
+.tag-input-box {
+  display: flex; flex-wrap: wrap; gap: 0.375rem; align-items: center;
+  padding: 0.5rem 0.625rem; min-height: 2.75rem;
+  border: 1px solid var(--border); border-radius: 0.5rem;
+  background: var(--surface); cursor: text;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.tag-input-box:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.tag-pill {
+  display: inline-flex; align-items: center; gap: 0.25rem;
+  background: var(--accent-dim); color: var(--accent);
+  border: 1px solid rgba(196,100,10,0.2);
+  padding: 0.125rem 0.5rem; border-radius: 9999px;
+  font-size: 0.8125rem; font-weight: 500;
+}
+.tag-remove {
+  background: none; border: none; cursor: pointer;
+  color: var(--accent); font-size: 1rem; line-height: 1; padding: 0;
+  opacity: 0.7;
+}
+.tag-remove:hover { opacity: 1; }
+.tag-input { border: none; outline: none; background: none; font-size: 0.875rem; min-width: 80px; flex: 1; }
+</style>
+
+<script>
+function handleTagKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(',','');
+    if (!val) return;
+    const pill = document.createElement('span');
+    pill.className = 'tag-pill';
+    pill.innerHTML = \`\${val} <button onclick="removeTag(this)" class="tag-remove">×</button>\`;
+    document.getElementById('tagBox').insertBefore(pill, e.target);
+    e.target.value = '';
+  }
+}
+function removeTag(btn) { btn.parentElement.remove(); }
+</script>`,
+    },
+
+    {
+      id: "u21",
+      title: "Popover",
+      description: "Contextual popover panel with trigger and arrow pointer.",
+      tags: ["Popover", "HTML"],
+      lang: "html",
+      code: `<div class="popover-wrap">
+  <button class="btn btn-secondary" id="popTrigger" onclick="togglePopover()">
+    More info
+  </button>
+  <div class="popover" id="popover" hidden>
+    <div class="popover-arrow"></div>
+    <h4 class="popover-title">What is this?</h4>
+    <p class="popover-body">Popovers surface additional context without leaving the current view. Use them for definitions, quick actions, or inline help.</p>
+    <a href="#" class="popover-link">Learn more →</a>
+  </div>
+</div>
+
+<style>
+.popover-wrap { position: relative; display: inline-block; }
+.popover {
+  position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%);
+  width: 260px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 0.875rem;
+  padding: 1rem; box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  z-index: 100;
+  animation: popIn 0.15s cubic-bezier(0.16,1,0.3,1);
+}
+@keyframes popIn { from { opacity:0; transform:translateX(-50%) translateY(-4px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+.popover-arrow {
+  position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 10px; height: 10px; background: var(--surface);
+  border-top: 1px solid var(--border); border-left: 1px solid var(--border);
+}
+.popover-title { font-size: 0.875rem; font-weight: 600; margin: 0 0 0.375rem; }
+.popover-body { font-size: 0.8125rem; color: var(--muted); line-height: 1.55; margin: 0 0 0.625rem; }
+.popover-link { font-size: 0.8125rem; color: var(--accent); font-weight: 500; }
+</style>
+
+<script>
+function togglePopover() {
+  const p = document.getElementById('popover');
+  p.hidden = !p.hidden;
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.popover-wrap')) {
+    document.getElementById('popover').hidden = true;
+  }
+});
+</script>`,
+    },
+
+    {
+      id: "u22",
+      title: "Breadcrumb",
+      description: "Navigation breadcrumb with separator and current page.",
+      tags: ["Navigation", "HTML"],
+      lang: "html",
+      code: `<nav aria-label="Breadcrumb">
+  <ol class="breadcrumb">
+    <li class="crumb"><a href="#">Home</a></li>
+    <li class="crumb-sep" aria-hidden="true">/</li>
+    <li class="crumb"><a href="#">Components</a></li>
+    <li class="crumb-sep" aria-hidden="true">/</li>
+    <li class="crumb current" aria-current="page">Breadcrumb</li>
+  </ol>
+</nav>
+
+<style>
+.breadcrumb {
+  display: flex; align-items: center; gap: 0.375rem;
+  list-style: none; padding: 0; margin: 0; flex-wrap: wrap;
+}
+.crumb a {
+  font-size: 0.875rem; color: var(--muted);
+  text-decoration: none; transition: color 0.15s;
+}
+.crumb a:hover { color: var(--text); }
+.crumb.current { font-size: 0.875rem; color: var(--text); font-weight: 500; }
+.crumb-sep { color: var(--border); font-size: 0.875rem; user-select: none; }
+</style>`,
+    },
+
+    {
+      id: "u23",
+      title: "Kbd / Shortcut Badge",
+      description: "Keyboard shortcut display badges for UI hints.",
+      tags: ["Keyboard", "HTML"],
+      lang: "html",
+      code: `<div class="kbd-examples">
+  <!-- Single key -->
+  <kbd class="kbd">⌘</kbd>
+  <kbd class="kbd">K</kbd>
+
+  <!-- Combo -->
+  <div class="kbd-combo">
+    <kbd class="kbd">⌘</kbd>
+    <span class="kbd-plus">+</span>
+    <kbd class="kbd">Shift</kbd>
+    <span class="kbd-plus">+</span>
+    <kbd class="kbd">P</kbd>
+  </div>
+
+  <!-- In context -->
+  <div class="kbd-hint">
+    <span>Open command palette</span>
+    <div class="kbd-combo">
+      <kbd class="kbd">⌘</kbd>
+      <span class="kbd-plus">+</span>
+      <kbd class="kbd">K</kbd>
+    </div>
+  </div>
+</div>
+
+<style>
+.kbd-examples { display: flex; flex-direction: column; gap: 1rem; }
+.kbd {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.2rem 0.5rem; min-width: 1.75rem;
+  border: 1px solid var(--border); border-bottom-width: 2px;
+  border-radius: 0.375rem; background: var(--surface);
+  font-size: 0.75rem; font-family: inherit; font-weight: 500;
+  color: var(--muted); box-shadow: 0 1px 0 var(--border);
+}
+.kbd-combo { display: inline-flex; align-items: center; gap: 0.25rem; }
+.kbd-plus { font-size: 0.75rem; color: var(--muted); }
+.kbd-hint {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.625rem 0.875rem; border: 1px solid var(--border);
+  border-radius: 0.5rem; font-size: 0.875rem;
+}
+</style>`,
+    },
+
+    {
+      id: "u24",
+      title: "Divider",
+      description: "Horizontal and vertical dividers with optional label.",
+      tags: ["Layout", "HTML"],
+      lang: "html",
+      code: `<!-- Plain divider -->
+<hr class="divider" />
+
+<!-- Labeled divider -->
+<div class="divider-label">
+  <span class="divider-line"></span>
+  <span class="divider-text">or continue with</span>
+  <span class="divider-line"></span>
+</div>
+
+<!-- Vertical divider (inline) -->
+<div style="display:flex;align-items:center;gap:1rem;height:2rem">
+  <span>Item one</span>
+  <div class="divider-vertical"></div>
+  <span>Item two</span>
+  <div class="divider-vertical"></div>
+  <span>Item three</span>
+</div>
+
+<style>
+.divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+.divider-label { display: flex; align-items: center; gap: 0.875rem; margin: 1.5rem 0; }
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-text { font-size: 0.8125rem; color: var(--muted); white-space: nowrap; }
+.divider-vertical { width: 1px; height: 100%; background: var(--border); }
+</style>`,
+    },
   ],
 
   "icon-systems": [
@@ -936,13 +1410,13 @@ document.querySelectorAll('.reveal').forEach(el => {
     { id: "f1", title: "Login Form", description: "Email + password + submit, including validation.", tags: ["Auth", "HTML"], lang: "html", code: `<form class="login-form" novalidate>
   <h1>Sign in</h1>
   <div class="input-group">
-    <label class="input-label" for="email">E-posta</label>
-    <input class="input" id="email" type="email" placeholder="ad@ornek.com" required />
+    <label class="input-label" for="email">Email</label>
+    <input class="input" id="email" type="email" placeholder="you@example.com" required />
   </div>
   <div class="input-group">
     <label class="input-label" for="password">Password</label>
     <input class="input" id="password" type="password" required />
-    <a href="#" class="input-hint" style="text-align:right">Passwordmi unuttum</a>
+    <a href="#" class="input-hint" style="text-align:right">Forgot password?</a>
   </div>
   <button type="submit" class="btn btn-primary" style="width:100%">Sign in</button>
   <p class="input-hint" style="text-align:center">
@@ -952,16 +1426,16 @@ document.querySelectorAll('.reveal').forEach(el => {
     { id: "f2", title: "Registration Form", description: "Multi-step registration flow.", tags: ["Auth", "HTML"], lang: "html", code: `<form class="register-form">
   <div class="form-row">
     <div class="input-group">
-      <label class="input-label">Ad</label>
+      <label class="input-label">First Name</label>
       <input class="input" type="text" placeholder="First name" />
     </div>
     <div class="input-group">
-      <label class="input-label">Soyad</label>
+      <label class="input-label">Last Name</label>
       <input class="input" type="text" placeholder="Last name" />
     </div>
   </div>
   <div class="input-group">
-    <label class="input-label">E-posta</label>
+    <label class="input-label">Email</label>
     <input class="input" type="email" />
   </div>
   <div class="input-group">
@@ -972,7 +1446,7 @@ document.querySelectorAll('.reveal').forEach(el => {
   <label class="toggle">
     <input type="checkbox" class="toggle-input" />
     <span class="toggle-track"><span class="toggle-thumb"></span></span>
-    <span>I want to receive the newsletter</span>
+    <span>Subscribe to newsletter</span>
   </label>
   <button type="submit" class="btn btn-primary" style="width:100%">Create account</button>
 </form>
@@ -1133,6 +1607,727 @@ function startEdit(el) {
 .editable:hover   { border-color: var(--border); }
 .editable.editing { border-color: var(--accent); outline: none; cursor: text; box-shadow: 0 0 0 3px var(--accent-dim); }
 </style>` },
+    { id: "f9", title: "OTP / Verification Input", description: "6-digit one-time password input with auto-focus.", tags: ["OTP", "HTML"], lang: "html", code: `<div class="otp-wrap">
+  <p class="input-label">Enter the 6-digit code sent to your email</p>
+  <div class="otp-inputs">
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+    <span class="otp-divider">—</span>
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+    <input class="otp-cell" type="text" maxlength="1" inputmode="numeric" />
+  </div>
+  <p class="input-hint">Didn't receive a code? <a href="#">Resend</a></p>
+</div>
+
+<style>
+.otp-inputs { display: flex; align-items: center; gap: 0.5rem; }
+.otp-cell {
+  width: 3rem; height: 3.5rem; text-align: center;
+  font-size: 1.25rem; font-weight: 600;
+  border: 1px solid var(--border); border-radius: 0.625rem;
+  background: var(--surface); color: var(--text);
+  outline: none; transition: border-color 0.15s, box-shadow 0.15s;
+}
+.otp-cell:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
+.otp-divider { color: var(--muted); font-size: 1.25rem; padding: 0 0.25rem; }
+</style>
+
+<script>
+document.querySelectorAll('.otp-cell').forEach((cell, i, cells) => {
+  cell.addEventListener('input', () => {
+    if (cell.value && cells[i + 1]) cells[i + 1].focus();
+  });
+  cell.addEventListener('keydown', (e) => {
+    if (e.key === 'Backspace' && !cell.value && cells[i - 1]) cells[i - 1].focus();
+  });
+});
+</script>` },
+
+    { id: "f10", title: "File Upload", description: "Drag & drop file upload area with preview state.", tags: ["Upload", "HTML"], lang: "html", code: `<div class="upload-zone" id="dropZone">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+    <polyline points="17 8 12 3 7 8"/>
+    <line x1="12" y1="3" x2="12" y2="15"/>
+  </svg>
+  <p class="upload-label">Drop files here or <label for="fileInput" class="upload-link">browse</label></p>
+  <p class="input-hint">PNG, JPG, PDF — max 10MB</p>
+  <input id="fileInput" type="file" hidden accept="image/*,.pdf" />
+</div>
+
+<style>
+.upload-zone {
+  border: 2px dashed var(--border); border-radius: 0.875rem;
+  padding: 2.5rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  color: var(--muted);
+}
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: var(--accent); background: var(--accent-dim);
+  color: var(--accent);
+}
+.upload-label { font-size: 0.9375rem; font-weight: 500; color: var(--text); }
+.upload-link { color: var(--accent); cursor: pointer; text-decoration: underline; }
+</style>
+
+<script>
+const zone = document.getElementById('dropZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('drag-over'); });
+zone.addEventListener('click', () => document.getElementById('fileInput').click());
+</script>` },
+
+    { id: "f11", title: "Multi-Step Form", description: "3-step form with progress indicator.", tags: ["Stepper", "HTML"], lang: "html", code: `<div class="multistep">
+  <!-- Progress -->
+  <div class="step-progress">
+    <div class="step-item active">
+      <div class="step-dot">1</div>
+      <span>Account</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item">
+      <div class="step-dot">2</div>
+      <span>Profile</span>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item">
+      <div class="step-dot">3</div>
+      <span>Review</span>
+    </div>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step-panel" id="step1">
+    <div class="input-group">
+      <label class="input-label">Email</label>
+      <input class="input" type="email" placeholder="you@example.com" />
+    </div>
+    <div class="input-group">
+      <label class="input-label">Password</label>
+      <input class="input" type="password" />
+    </div>
+    <button class="btn btn-primary" onclick="goStep(2)">Continue →</button>
+  </div>
+</div>
+
+<style>
+.step-progress { display: flex; align-items: center; margin-bottom: 2rem; }
+.step-item { display: flex; flex-direction: column; align-items: center; gap: 0.375rem; }
+.step-dot {
+  width: 2rem; height: 2rem; border-radius: 50%;
+  border: 2px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 600; color: var(--muted);
+  transition: all 0.2s;
+}
+.step-item.active .step-dot { border-color: var(--accent); background: var(--accent); color: #fff; }
+.step-item span { font-size: 0.75rem; color: var(--muted); }
+.step-item.active span { color: var(--text); font-weight: 500; }
+.step-line { flex: 1; height: 1px; background: var(--border); margin: 0 0.5rem; margin-bottom: 1.25rem; }
+.multistep { display: flex; flex-direction: column; gap: 1rem; }
+</style>` },
+
+    { id: "f12", title: "Newsletter Signup", description: "Minimal inline email capture with submit.", tags: ["Email", "HTML"], lang: "html", code: `<div class="newsletter">
+  <div class="newsletter-text">
+    <h3>Stay in the loop</h3>
+    <p class="input-hint">No spam. Unsubscribe anytime.</p>
+  </div>
+  <form class="newsletter-form" onsubmit="return false">
+    <input class="input" type="email" placeholder="your@email.com" required />
+    <button type="submit" class="btn btn-primary">Subscribe</button>
+  </form>
+</div>
+
+<style>
+.newsletter {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 1rem; padding: 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap;
+}
+.newsletter-form { display: flex; gap: 0.75rem; flex: 1; min-width: 280px; }
+.newsletter-form .input { flex: 1; }
+</style>` },
+
+    { id: "f13", title: "Contact Form", description: "Name, email, subject, message — full contact layout.", tags: ["Contact", "HTML"], lang: "html", code: `<form class="contact-form" novalidate>
+  <div class="form-row">
+    <div class="input-group">
+      <label class="input-label" for="firstName">First Name</label>
+      <input class="input" id="firstName" type="text" placeholder="John" />
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="lastName">Last Name</label>
+      <input class="input" id="lastName" type="text" placeholder="Doe" />
+    </div>
+  </div>
+  <div class="input-group">
+    <label class="input-label" for="contactEmail">Email</label>
+    <input class="input" id="contactEmail" type="email" placeholder="you@example.com" />
+  </div>
+  <div class="input-group">
+    <label class="input-label" for="subject">Subject</label>
+    <input class="input" id="subject" type="text" placeholder="How can we help?" />
+  </div>
+  <div class="input-group">
+    <label class="input-label" for="message">Message</label>
+    <textarea class="input" id="message" rows="5" placeholder="Write your message..."></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Send Message →</button>
+</form>
+
+<style>
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+textarea.input { resize: vertical; min-height: 120px; }
+@media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+</style>` },
+
+    { id: "f14", title: "Rating Input", description: "Interactive star rating with hover state.", tags: ["Rating", "HTML"], lang: "html", code: `<div class="rating-group" role="group" aria-label="Rating">
+  <input type="radio" id="s5" name="rating" value="5" hidden />
+  <label for="s5" class="star" aria-label="5 stars">★</label>
+  <input type="radio" id="s4" name="rating" value="4" hidden />
+  <label for="s4" class="star" aria-label="4 stars">★</label>
+  <input type="radio" id="s3" name="rating" value="3" hidden />
+  <label for="s3" class="star" aria-label="3 stars">★</label>
+  <input type="radio" id="s2" name="rating" value="2" hidden />
+  <label for="s2" class="star" aria-label="2 stars">★</label>
+  <input type="radio" id="s1" name="rating" value="1" hidden />
+  <label for="s1" class="star" aria-label="1 star">★</label>
+</div>
+
+<style>
+.rating-group { display: flex; flex-direction: row-reverse; gap: 0.25rem; width: fit-content; }
+.star {
+  font-size: 2rem; color: var(--border); cursor: pointer;
+  transition: color 0.15s; line-height: 1;
+}
+.rating-group:hover .star { color: #F59E0B; }
+.star:hover ~ .star { color: #F59E0B; }
+.star:hover { color: #F59E0B; }
+input[type="radio"]:checked ~ label { color: #F59E0B; }
+</style>` },
+
+    { id: "f15", title: "Password Strength Meter", description: "Password field with real-time strength indicator.", tags: ["Password", "HTML"], lang: "html", code: `<div class="input-group">
+  <label class="input-label" for="pwd">Password</label>
+  <div class="pwd-wrap">
+    <input class="input" id="pwd" type="password" placeholder="Enter password" oninput="checkStrength(this.value)" />
+    <button type="button" class="pwd-toggle" onclick="togglePwd()">👁</button>
+  </div>
+  <div class="strength-bars">
+    <div class="strength-bar" id="b1"></div>
+    <div class="strength-bar" id="b2"></div>
+    <div class="strength-bar" id="b3"></div>
+    <div class="strength-bar" id="b4"></div>
+  </div>
+  <p class="input-hint" id="strengthLabel">—</p>
+</div>
+
+<style>
+.pwd-wrap { position: relative; }
+.pwd-wrap .input { width: 100%; padding-right: 2.75rem; box-sizing: border-box; }
+.pwd-toggle {
+  position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; font-size: 1rem; opacity: 0.5;
+}
+.strength-bars { display: flex; gap: 0.375rem; margin-top: 0.5rem; }
+.strength-bar { flex: 1; height: 3px; border-radius: 9999px; background: var(--border); transition: background 0.3s; }
+.strength-bar.weak { background: #EF4444; }
+.strength-bar.fair { background: #F59E0B; }
+.strength-bar.good { background: #3B82F6; }
+.strength-bar.strong { background: #22C55E; }
+</style>
+
+<script>
+function checkStrength(val) {
+  const bars = [b1, b2, b3, b4];
+  const label = document.getElementById('strengthLabel');
+  bars.forEach(b => b.className = 'strength-bar');
+  let score = 0;
+  if (val.length >= 8) score++;
+  if (/[A-Z]/.test(val)) score++;
+  if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+  const cls = ['weak','fair','good','strong'];
+  const labels = ['Weak','Fair','Good','Strong'];
+  for (let i = 0; i < score; i++) bars[i].classList.add(cls[score - 1]);
+  label.textContent = score ? labels[score - 1] : '—';
+}
+function togglePwd() {
+  const i = document.getElementById('pwd');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+</script>` },
+
+    { id: "f16", title: "Inline Form Validation", description: "Real-time field validation with error and success states.", tags: ["Validation", "HTML"], lang: "html", code: `<form class="validated-form" novalidate onsubmit="validateForm(event)">
+  <div class="input-group">
+    <label class="input-label" for="vEmail">Email</label>
+    <input class="input" id="vEmail" type="email" placeholder="you@example.com" oninput="validateEmail(this)" />
+    <span class="field-msg" id="vEmailMsg"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<style>
+.field-msg { font-size: 0.75rem; margin-top: 0.25rem; }
+.input.valid { border-color: #22C55E; }
+.input.invalid { border-color: #EF4444; }
+.field-msg.success { color: #16A34A; }
+.field-msg.error { color: #DC2626; }
+</style>
+
+<script>
+function validateEmail(input) {
+  const msg = document.getElementById('vEmailMsg');
+  const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+  input.classList.toggle('valid', valid);
+  input.classList.toggle('invalid', !valid && input.value.length > 0);
+  if (valid) { msg.textContent = '✓ Looks good'; msg.className = 'field-msg success'; }
+  else if (input.value.length > 0) { msg.textContent = 'Enter a valid email address'; msg.className = 'field-msg error'; }
+  else { msg.textContent = ''; }
+}
+function validateForm(e) {
+  e.preventDefault();
+  validateEmail(document.getElementById('vEmail'));
+}
+</script>` },
+  ],
+
+  "hero-sections": [
+    {
+      id: "hs1",
+      title: "Centered Hero",
+      description: "Clean centered layout with headline, subtext, and dual CTA buttons.",
+      tags: ["Minimal", "HTML"],
+      lang: "html",
+      code: `<section class="hero-centered">
+  <div class="hero-eyebrow">New · Interface Pattern Catalog</div>
+  <h1 class="hero-title">Patterns to shape<br/>the screen.</h1>
+  <p class="hero-sub">A focused catalog of interface references for designers and frontend teams building calmer, sharper products.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn btn-primary">Browse patterns →</a>
+    <a href="#" class="btn btn-ghost">View on GitHub</a>
+  </div>
+</section>
+
+<style>
+.hero-centered {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 1.5rem;
+  padding: clamp(4rem, 10vw, 8rem) clamp(1rem, 5vw, 2rem);
+  max-width: 720px; margin: 0 auto;
+}
+.hero-eyebrow {
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-dim);
+  padding: 0.25rem 0.875rem; border-radius: 9999px;
+}
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.05; margin: 0;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.175rem); color: var(--muted);
+  line-height: 1.7; max-width: 560px; margin: 0;
+}
+.hero-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+</style>`,
+    },
+
+    {
+      id: "hs2",
+      title: "Split Hero",
+      description: "Left-aligned text with right-side visual panel.",
+      tags: ["Split", "HTML"],
+      lang: "html",
+      code: `<section class="hero-split">
+  <div class="hero-split-text">
+    <span class="hero-eyebrow">Design system</span>
+    <h1 class="hero-title" style="text-align:left">Build interfaces<br/>that hold up.</h1>
+    <p class="hero-sub" style="text-align:left">Stop rebuilding the same components. Start from patterns that are already tested, accessible, and production-ready.</p>
+    <div class="hero-actions" style="justify-content:flex-start">
+      <a href="#" class="btn btn-primary">Get started →</a>
+      <a href="#" class="btn btn-secondary">See examples</a>
+    </div>
+    <div class="hero-social-proof">
+      <div class="avatar-group">
+        <div class="avatar avatar-fallback" style="width:2rem;height:2rem;font-size:0.625rem">A</div>
+        <div class="avatar avatar-fallback" style="width:2rem;height:2rem;font-size:0.625rem">B</div>
+        <div class="avatar avatar-fallback" style="width:2rem;height:2rem;font-size:0.625rem">C</div>
+      </div>
+      <span class="proof-text">Trusted by 2,400+ developers</span>
+    </div>
+  </div>
+  <div class="hero-split-visual"></div>
+</section>
+
+<style>
+.hero-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 80vh; align-items: center;
+  gap: 4rem; padding: 4rem clamp(1rem, 5vw, 3rem);
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-split-text { display: flex; flex-direction: column; gap: 1.5rem; }
+.hero-split-visual {
+  height: 480px; border-radius: 1.25rem;
+  background: linear-gradient(135deg, #1A3A6A22, #3A8AAA22);
+  border: 1px solid var(--border);
+}
+.hero-social-proof { display: flex; align-items: center; gap: 0.75rem; }
+.proof-text { font-size: 0.875rem; color: var(--muted); }
+@media (max-width: 768px) {
+  .hero-split { grid-template-columns: 1fr; }
+  .hero-split-visual { height: 240px; }
+}
+</style>`,
+    },
+
+    {
+      id: "hs3",
+      title: "Dark Hero",
+      description: "Full dark background hero with glow effect and badge.",
+      tags: ["Dark", "HTML"],
+      lang: "html",
+      code: `<section class="hero-dark">
+  <div class="hero-glow"></div>
+  <div class="hero-dark-inner">
+    <div class="hero-eyebrow" style="background:rgba(255,255,255,0.08);color:#fff">✦ Now in public beta</div>
+    <h1 class="hero-title" style="color:#fff">The interface<br/>pattern catalog.</h1>
+    <p class="hero-sub" style="color:rgba(255,255,255,0.55)">Copy-paste ready HTML and CSS patterns for teams who care about details.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn" style="background:#fff;color:#1C1A17">Browse catalog →</a>
+      <a href="#" class="btn" style="border:1px solid rgba(255,255,255,0.2);color:#fff;background:transparent">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-dark {
+  background: #0D0C0A; position: relative; overflow: hidden;
+  padding: clamp(5rem, 12vw, 10rem) clamp(1rem, 5vw, 2rem);
+  display: flex; justify-content: center;
+}
+.hero-glow {
+  position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(196,100,10,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-dark-inner {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 1.5rem; max-width: 680px; position: relative;
+}
+</style>`,
+    },
+
+    {
+      id: "hs4",
+      title: "Hero with Stats",
+      description: "Headline with key metrics displayed below the CTA.",
+      tags: ["Stats", "HTML"],
+      lang: "html",
+      code: `<section class="hero-stats-wrap">
+  <div class="hero-centered">
+    <h1 class="hero-title">Everything you need<br/>to ship faster.</h1>
+    <p class="hero-sub">Production-ready interface patterns. Copy the code, keep the quality.</p>
+    <a href="#" class="btn btn-primary" style="font-size:1rem;padding:0.75rem 2rem">Start building →</a>
+  </div>
+  <div class="hero-divider"></div>
+  <div class="hero-metrics">
+    <div class="hero-metric">
+      <span class="metric-value">150+</span>
+      <span class="metric-label">UI patterns</span>
+    </div>
+    <div class="metric-sep"></div>
+    <div class="hero-metric">
+      <span class="metric-value">12</span>
+      <span class="metric-label">Categories</span>
+    </div>
+    <div class="metric-sep"></div>
+    <div class="hero-metric">
+      <span class="metric-value">0</span>
+      <span class="metric-label">Dependencies</span>
+    </div>
+    <div class="metric-sep"></div>
+    <div class="hero-metric">
+      <span class="metric-value">Free</span>
+      <span class="metric-label">Always</span>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-stats-wrap { display: flex; flex-direction: column; align-items: center; gap: 3rem; padding: clamp(4rem, 8vw, 7rem) 1rem; }
+.hero-divider { width: 100%; max-width: 900px; height: 1px; background: var(--border); }
+.hero-metrics { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; justify-content: center; }
+.hero-metric { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.metric-value { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; }
+.metric-label { font-size: 0.8125rem; color: var(--muted); }
+.metric-sep { width: 1px; height: 2.5rem; background: var(--border); }
+@media (max-width: 540px) { .metric-sep { display: none; } }
+</style>`,
+    },
+
+    {
+      id: "hs5",
+      title: "Announcement Hero",
+      description: "Hero with top announcement banner and scroll indicator.",
+      tags: ["Banner", "HTML"],
+      lang: "html",
+      code: `<section class="hero-announce-wrap">
+  <a href="#" class="announce-bar">
+    <span class="announce-badge">New</span>
+    <span>Dark mode variants now available for all components</span>
+    <span class="announce-arrow">→</span>
+  </a>
+  <div class="hero-centered">
+    <h1 class="hero-title">Interface patterns<br/>worth referencing.</h1>
+    <p class="hero-sub">A curated catalog of UI building blocks. Preview first, copy second.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Browse catalog →</a>
+      <a href="#" class="btn btn-ghost">Learn more</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<style>
+.hero-announce-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2.5rem; padding: clamp(3rem, 8vw, 7rem) 1rem;
+}
+.announce-bar {
+  display: flex; align-items: center; gap: 0.625rem;
+  border: 1px solid var(--border); border-radius: 9999px;
+  padding: 0.375rem 1rem; font-size: 0.8125rem;
+  background: var(--surface); text-decoration: none; color: var(--text);
+  transition: border-color 0.2s;
+}
+.announce-bar:hover { border-color: var(--accent); }
+.announce-badge {
+  background: var(--accent); color: #fff;
+  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem; border-radius: 9999px;
+}
+.announce-arrow { color: var(--muted); }
+.scroll-indicator {
+  width: 1.5rem; height: 2.5rem; border: 2px solid var(--border);
+  border-radius: 9999px; display: flex; justify-content: center; padding-top: 0.375rem;
+}
+.scroll-dot {
+  width: 4px; height: 8px; background: var(--accent); border-radius: 9999px;
+  animation: scrollBounce 1.5s infinite;
+}
+@keyframes scrollBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+</style>`,
+    },
+
+    {
+      id: "hs6",
+      title: "Minimal Text Hero",
+      description: "Typography-first hero with large display text and single CTA.",
+      tags: ["Typography", "HTML"],
+      lang: "html",
+      code: `<section class="hero-text-only">
+  <div class="hero-text-inner">
+    <p class="hero-overline">Interface · Pattern · Catalog</p>
+    <h1 class="hero-display">Motiff.</h1>
+    <div class="hero-text-footer">
+      <p class="hero-sub" style="max-width:360px;text-align:left">Copy-paste HTML and CSS interface patterns for teams who ship.</p>
+      <a href="#" class="btn btn-primary">Get started →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-text-only { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 3rem); }
+.hero-text-inner { max-width: 1100px; margin: 0 auto; }
+.hero-overline {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 1rem;
+}
+.hero-display {
+  font-size: clamp(5rem, 15vw, 12rem); font-weight: 800;
+  letter-spacing: -0.05em; line-height: 0.9; margin: 0 0 2.5rem;
+}
+.hero-text-footer {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 2rem;
+}
+</style>`,
+    },
+
+    {
+      id: "hs7",
+      title: "Video Background Hero",
+      description: "Hero with looping video background and overlay text.",
+      tags: ["Video", "HTML"],
+      lang: "html",
+      code: `<section class="hero-video">
+  <video class="hero-video-bg" autoplay muted loop playsinline>
+    <source src="your-video.mp4" type="video/mp4" />
+  </video>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-video-content">
+    <h1 class="hero-title" style="color:#fff">Bold ideas.<br/>Clean execution.</h1>
+    <p class="hero-sub" style="color:rgba(255,255,255,0.7)">Interface patterns built for teams who care about the craft.</p>
+    <a href="#" class="btn" style="background:#fff;color:#1C1A17">Explore →</a>
+  </div>
+</section>
+
+<style>
+.hero-video {
+  position: relative; min-height: 90vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-video-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+.hero-video-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.75));
+  z-index: 1;
+}
+.hero-video-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 1.5rem; padding: 2rem;
+  max-width: 680px;
+}
+</style>`,
+    },
+
+    {
+      id: "hs8",
+      title: "Gradient Mesh Hero",
+      description: "Hero with animated CSS gradient mesh background.",
+      tags: ["Gradient", "CSS"],
+      lang: "html",
+      code: `<section class="hero-mesh">
+  <div class="mesh-bg"></div>
+  <div class="hero-centered" style="position:relative;z-index:1">
+    <div class="hero-eyebrow">Open source · Free forever</div>
+    <h1 class="hero-title">Design with intention.</h1>
+    <p class="hero-sub">Reference patterns built around calm, purposeful UI. No noise, no bloat.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">Browse patterns →</a>
+      <a href="#" class="btn btn-ghost">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-mesh {
+  position: relative; overflow: hidden;
+  padding: clamp(5rem, 12vw, 10rem) 1rem;
+  display: flex; justify-content: center;
+}
+.mesh-bg {
+  position: absolute; inset: -50%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(196,100,10,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(42,90,106,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(138,58,106,0.10) 0%, transparent 50%);
+  animation: meshShift 8s ease-in-out infinite alternate;
+}
+@keyframes meshShift {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1.1) rotate(3deg); }
+}
+</style>`,
+    },
+
+    {
+      id: "hs9",
+      title: "App Screenshot Hero",
+      description: "SaaS-style hero with app screenshot mockup.",
+      tags: ["SaaS", "HTML"],
+      lang: "html",
+      code: `<section class="hero-app-wrap">
+  <div class="hero-app-text">
+    <div class="hero-eyebrow">Launching soon</div>
+    <h1 class="hero-title" style="text-align:left">Your product,<br/>shipped faster.</h1>
+    <p class="hero-sub" style="text-align:left">Stop spending weeks on UI foundations. Use proven patterns and focus on what makes your product unique.</p>
+    <div class="hero-actions" style="justify-content:flex-start">
+      <a href="#" class="btn btn-primary">Request access →</a>
+    </div>
+  </div>
+  <div class="hero-app-mockup">
+    <div class="mockup-browser">
+      <div class="mockup-bar">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <div class="mockup-url">motiff-alpha.vercel.app</div>
+      </div>
+      <div class="mockup-screen"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-app-wrap {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  align-items: center; gap: 4rem;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 3rem);
+  max-width: 1200px; margin: 0 auto;
+}
+.hero-app-text { display: flex; flex-direction: column; gap: 1.5rem; }
+.mockup-browser { border: 1px solid var(--border); border-radius: 0.875rem; overflow: hidden; background: var(--surface); box-shadow: 0 24px 64px rgba(0,0,0,0.08); }
+.mockup-bar { display: flex; align-items: center; gap: 0.375rem; padding: 0.625rem 0.875rem; border-bottom: 1px solid var(--border); background: var(--bg); }
+.dot { width: 0.625rem; height: 0.625rem; border-radius: 50%; }
+.dot.red { background: #EF4444; }
+.dot.yellow { background: #F59E0B; }
+.dot.green { background: #22C55E; }
+.mockup-url { flex: 1; text-align: center; font-size: 0.75rem; color: var(--muted); background: var(--border); padding: 0.2rem 0.75rem; border-radius: 9999px; }
+.mockup-screen { height: 300px; background: var(--bg); }
+@media (max-width: 768px) { .hero-app-wrap { grid-template-columns: 1fr; } }
+</style>`,
+    },
+
+    {
+      id: "hs10",
+      title: "Waitlist Hero",
+      description: "Pre-launch hero with inline email waitlist form.",
+      tags: ["Waitlist", "HTML"],
+      lang: "html",
+      code: `<section class="hero-centered">
+  <div class="waitlist-tag">
+    <span class="waitlist-dot"></span>
+    <span>247 people on the waitlist</span>
+  </div>
+  <h1 class="hero-title">Coming soon.<br/>Worth the wait.</h1>
+  <p class="hero-sub">We're putting the finishing touches on something great. Drop your email and be first to know.</p>
+  <form class="waitlist-form" onsubmit="return false">
+    <input class="input" type="email" placeholder="your@email.com" required style="min-width:260px" />
+    <button type="submit" class="btn btn-primary">Join waitlist →</button>
+  </form>
+  <p class="hero-sub" style="font-size:0.8125rem">No spam. Unsubscribe anytime.</p>
+</section>
+
+<style>
+.waitlist-tag {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.8125rem; color: var(--muted);
+  border: 1px solid var(--border); padding: 0.375rem 0.875rem;
+  border-radius: 9999px; background: var(--surface);
+}
+.waitlist-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #22C55E;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); } 50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.08); } }
+.waitlist-form { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+</style>`,
+    },
   ],
 
   "navigation": [
@@ -1599,6 +2794,300 @@ function applyTheme(theme) {
 .blog-title  { font-weight: 600; line-height: 1.35; }
 .blog-excerpt { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
 .blog-author { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; margin-top: 0.25rem; }
+</style>` },
+    { id: "c9", title: "Profile Card", description: "User profile card with avatar, name, role, and social links.", tags: ["Profile", "HTML"], lang: "html", code: `<div class="profile-card">
+  <div class="profile-cover"></div>
+  <div class="profile-body">
+    <div class="profile-avatar">
+      <div class="avatar avatar-fallback" style="width:4rem;height:4rem;font-size:1.25rem">JD</div>
+    </div>
+    <h3 class="profile-name">Jane Doe</h3>
+    <p class="profile-role">Product Designer · San Francisco</p>
+    <p class="profile-bio">Crafting calm, sharp interfaces for teams that care about details.</p>
+    <div class="profile-stats">
+      <div class="stat"><strong>128</strong><span>Projects</span></div>
+      <div class="stat"><strong>4.2k</strong><span>Followers</span></div>
+      <div class="stat"><strong>310</strong><span>Following</span></div>
+    </div>
+    <button class="btn btn-primary" style="width:100%">Follow</button>
+  </div>
+</div>
+
+<style>
+.profile-card { border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; background: var(--surface); }
+.profile-cover { height: 80px; background: linear-gradient(135deg, #1A3A6A, #3A8AAA); }
+.profile-body { padding: 0 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.profile-avatar { margin-top: -2rem; }
+.profile-name { font-size: 1rem; font-weight: 600; margin: 0; }
+.profile-role { font-size: 0.8125rem; color: var(--muted); margin: 0; }
+.profile-bio { font-size: 0.875rem; color: var(--muted); line-height: 1.5; margin: 0; }
+.profile-stats { display: flex; gap: 1rem; padding: 0.75rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stat { display: flex; flex-direction: column; gap: 0.125rem; }
+.stat strong { font-size: 0.9375rem; font-weight: 600; }
+.stat span { font-size: 0.75rem; color: var(--muted); }
+</style>` },
+
+    { id: "c10", title: "Pricing Card", description: "Single pricing tier card with feature list and CTA.", tags: ["Pricing", "HTML"], lang: "html", code: `<div class="pricing-card">
+  <div class="pricing-badge">Most Popular</div>
+  <div class="pricing-header">
+    <h3>Pro</h3>
+    <div class="pricing-price">
+      <span class="price-amount">$29</span>
+      <span class="price-period">/ month</span>
+    </div>
+    <p class="pricing-desc">Everything you need to ship faster.</p>
+  </div>
+  <ul class="pricing-features">
+    <li>✓ Unlimited projects</li>
+    <li>✓ Priority support</li>
+    <li>✓ Custom domain</li>
+    <li>✓ Advanced analytics</li>
+    <li class="muted">✗ White-label</li>
+  </ul>
+  <button class="btn btn-primary" style="width:100%">Get started</button>
+  <p class="pricing-note">No credit card required</p>
+</div>
+
+<style>
+.pricing-card {
+  border: 1px solid var(--accent); border-radius: 1rem;
+  padding: 1.75rem; background: var(--surface);
+  display: flex; flex-direction: column; gap: 1.25rem;
+  position: relative;
+}
+.pricing-badge {
+  position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff;
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.25rem 0.875rem; border-radius: 9999px; white-space: nowrap;
+}
+.pricing-header { display: flex; flex-direction: column; gap: 0.375rem; }
+.pricing-header h3 { font-size: 1rem; font-weight: 600; margin: 0; }
+.pricing-price { display: flex; align-items: baseline; gap: 0.25rem; }
+.price-amount { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; }
+.price-period { font-size: 0.875rem; color: var(--muted); }
+.pricing-desc { font-size: 0.875rem; color: var(--muted); margin: 0; }
+.pricing-features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.625rem; font-size: 0.875rem; }
+.pricing-features .muted { color: var(--muted); }
+.pricing-note { text-align: center; font-size: 0.75rem; color: var(--muted); margin: 0; }
+</style>` },
+
+    { id: "c11", title: "Stat Card", description: "KPI / metric card with trend indicator.", tags: ["Dashboard", "HTML"], lang: "html", code: `<div class="stat-card">
+  <div class="stat-header">
+    <span class="stat-label">Total Revenue</span>
+    <span class="stat-icon">💰</span>
+  </div>
+  <div class="stat-value">$48,295</div>
+  <div class="stat-trend positive">
+    <span>↑ 12.5%</span>
+    <span class="stat-trend-label">vs last month</span>
+  </div>
+  <div class="stat-bar">
+    <div class="stat-bar-fill" style="width: 72%"></div>
+  </div>
+</div>
+
+<style>
+.stat-card {
+  border: 1px solid var(--border); border-radius: 1rem;
+  padding: 1.5rem; background: var(--surface);
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.stat-header { display: flex; justify-content: space-between; align-items: center; }
+.stat-label { font-size: 0.8125rem; color: var(--muted); font-weight: 500; }
+.stat-icon { font-size: 1.25rem; }
+.stat-value { font-size: 1.875rem; font-weight: 700; letter-spacing: -0.03em; }
+.stat-trend { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 500; }
+.stat-trend.positive { color: #16A34A; }
+.stat-trend.negative { color: #DC2626; }
+.stat-trend-label { color: var(--muted); font-weight: 400; }
+.stat-bar { height: 4px; background: var(--border); border-radius: 9999px; overflow: hidden; }
+.stat-bar-fill { height: 100%; background: var(--accent); border-radius: 9999px; }
+</style>` },
+
+    { id: "c12", title: "Blog Post Card", description: "Article card with cover image, tag, title, and author.", tags: ["Blog", "HTML"], lang: "html", code: `<article class="blog-card">
+  <div class="blog-cover">
+    <span class="blog-tag">Design</span>
+  </div>
+  <div class="blog-body">
+    <div class="blog-meta">
+      <span>Apr 9, 2026</span>
+      <span>·</span>
+      <span>5 min read</span>
+    </div>
+    <h3 class="blog-title">The quiet power of negative space in UI design</h3>
+    <p class="blog-excerpt">How intentional emptiness shapes attention, reduces noise, and makes interfaces feel effortless.</p>
+    <div class="blog-author">
+      <div class="avatar avatar-fallback" style="width:1.75rem;height:1.75rem;font-size:0.625rem">JD</div>
+      <span>Jane Doe</span>
+    </div>
+  </div>
+</article>
+
+<style>
+.blog-card { border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; background: var(--surface); }
+.blog-cover { height: 160px; background: linear-gradient(135deg, #2A5A3A, #5A9A6A); position: relative; }
+.blog-tag {
+  position: absolute; bottom: 0.75rem; left: 0.75rem;
+  background: rgba(0,0,0,0.5); color: #fff;
+  font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.2rem 0.625rem; border-radius: 9999px; backdrop-filter: blur(4px);
+}
+.blog-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.625rem; }
+.blog-meta { font-size: 0.75rem; color: var(--muted); display: flex; gap: 0.375rem; }
+.blog-title { font-size: 1rem; font-weight: 600; line-height: 1.35; margin: 0; }
+.blog-excerpt { font-size: 0.875rem; color: var(--muted); line-height: 1.55; margin: 0; }
+.blog-author { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 500; margin-top: 0.25rem; }
+</style>` },
+
+    { id: "c13", title: "Product Card", description: "E-commerce product card with image, price, and add-to-cart.", tags: ["E-commerce", "HTML"], lang: "html", code: `<div class="product-card">
+  <div class="product-image">
+    <span class="product-badge">Sale</span>
+    <button class="product-wishlist" aria-label="Add to wishlist">♡</button>
+  </div>
+  <div class="product-body">
+    <p class="product-category">Footwear</p>
+    <h3 class="product-name">Minimal Runner V2</h3>
+    <div class="product-pricing">
+      <span class="product-price">$89</span>
+      <span class="product-original">$120</span>
+    </div>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#1C1A17"></span>
+      <span class="color-dot" style="background:#C4640A"></span>
+      <span class="color-dot" style="background:#2A5A6A"></span>
+    </div>
+    <button class="btn btn-primary" style="width:100%">Add to cart</button>
+  </div>
+</div>
+
+<style>
+.product-card { border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; background: var(--surface); }
+.product-image { height: 200px; background: var(--border); position: relative; }
+.product-badge {
+  position: absolute; top: 0.75rem; left: 0.75rem;
+  background: #EF4444; color: #fff;
+  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 0.2rem 0.625rem; border-radius: 9999px;
+}
+.product-wishlist {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  background: var(--surface); border: 1px solid var(--border);
+  width: 2rem; height: 2rem; border-radius: 50%; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.product-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.product-category { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 0; }
+.product-name { font-size: 0.9375rem; font-weight: 600; margin: 0; }
+.product-pricing { display: flex; align-items: baseline; gap: 0.5rem; }
+.product-price { font-size: 1.125rem; font-weight: 700; }
+.product-original { font-size: 0.875rem; color: var(--muted); text-decoration: line-through; }
+.product-colors { display: flex; gap: 0.375rem; }
+.color-dot { width: 1rem; height: 1rem; border-radius: 50%; border: 2px solid var(--surface); outline: 1px solid var(--border); cursor: pointer; }
+</style>` },
+
+    { id: "c14", title: "Testimonial Card", description: "Customer quote card with avatar, name, and star rating.", tags: ["Social Proof", "HTML"], lang: "html", code: `<div class="testimonial-card">
+  <div class="testimonial-stars">★★★★★</div>
+  <blockquote class="testimonial-quote">
+    "This is the cleanest component library I've used. Dropped straight into our design system without a single conflict."
+  </blockquote>
+  <div class="testimonial-author">
+    <div class="avatar avatar-fallback" style="width:2.5rem;height:2.5rem;font-size:0.75rem">MK</div>
+    <div>
+      <p class="testimonial-name">Marcus Kim</p>
+      <p class="testimonial-role">Lead Designer at Vercel</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.testimonial-card {
+  border: 1px solid var(--border); border-radius: 1rem;
+  padding: 1.75rem; background: var(--surface);
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.testimonial-stars { color: #F59E0B; font-size: 1rem; letter-spacing: 0.1em; }
+.testimonial-quote {
+  font-size: 0.9375rem; line-height: 1.65;
+  color: var(--text); margin: 0; font-style: italic;
+}
+.testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+.testimonial-name { font-size: 0.875rem; font-weight: 600; margin: 0; }
+.testimonial-role { font-size: 0.75rem; color: var(--muted); margin: 0; }
+</style>` },
+
+    { id: "c15", title: "Notification Card", description: "System notification card with icon, timestamp, and action.", tags: ["Notification", "HTML"], lang: "html", code: `<div class="notif-card">
+  <div class="notif-icon notif-success">✓</div>
+  <div class="notif-content">
+    <p class="notif-title">Deployment successful</p>
+    <p class="notif-desc">motiff-alpha · production · v2.4.1</p>
+    <p class="notif-time">2 minutes ago</p>
+  </div>
+  <button class="notif-close" aria-label="Dismiss">✕</button>
+</div>
+
+<div class="notif-card" style="margin-top:0.75rem">
+  <div class="notif-icon notif-warning">!</div>
+  <div class="notif-content">
+    <p class="notif-title">Storage limit approaching</p>
+    <p class="notif-desc">You've used 87% of your storage quota.</p>
+    <p class="notif-time">1 hour ago</p>
+  </div>
+  <button class="notif-close" aria-label="Dismiss">✕</button>
+</div>
+
+<style>
+.notif-card {
+  display: flex; align-items: flex-start; gap: 0.875rem;
+  padding: 1rem 1.125rem; border: 1px solid var(--border);
+  border-radius: 0.875rem; background: var(--surface);
+}
+.notif-icon {
+  width: 2rem; height: 2rem; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.875rem; font-weight: 700;
+}
+.notif-success { background: rgba(34,197,94,.12); color: #16A34A; }
+.notif-warning { background: rgba(245,158,11,.12); color: #D97706; }
+.notif-error { background: rgba(239,68,68,.12); color: #DC2626; }
+.notif-content { flex: 1; display: flex; flex-direction: column; gap: 0.125rem; }
+.notif-title { font-size: 0.875rem; font-weight: 600; margin: 0; }
+.notif-desc { font-size: 0.8125rem; color: var(--muted); margin: 0; }
+.notif-time { font-size: 0.75rem; color: var(--muted); margin: 0; margin-top: 0.25rem; }
+.notif-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.875rem; padding: 0; flex-shrink: 0; }
+</style>` },
+
+    { id: "c16", title: "Feature Card", description: "Icon + title + description card for landing page feature sections.", tags: ["Landing", "HTML"], lang: "html", code: `<div class="feature-grid">
+  <div class="feature-card">
+    <div class="feature-icon">⚡</div>
+    <h3 class="feature-title">Instant preview</h3>
+    <p class="feature-desc">See every pattern in an isolated preview before copying a single line of code.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🎨</div>
+    <h3 class="feature-title">Token-driven</h3>
+    <p class="feature-desc">All components use CSS custom properties. Drop into any design system.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">📦</div>
+    <h3 class="feature-title">Zero dependencies</h3>
+    <p class="feature-desc">Pure HTML and CSS. No framework, no bundler, no setup required.</p>
+  </div>
+</div>
+
+<style>
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.feature-card {
+  border: 1px solid var(--border); border-radius: 1rem;
+  padding: 1.5rem; background: var(--surface);
+  display: flex; flex-direction: column; gap: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.feature-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.feature-icon { font-size: 1.75rem; line-height: 1; }
+.feature-title { font-size: 0.9375rem; font-weight: 600; margin: 0; }
+.feature-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; margin: 0; }
+@media (max-width: 640px) { .feature-grid { grid-template-columns: 1fr; } }
 </style>` },
   ],
 

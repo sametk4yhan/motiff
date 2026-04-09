@@ -492,6 +492,84 @@ function ThumbDragDrop() {
   </div>;
 }
 
+function ThumbCheckboxGroup() {
+  return <div style={{ ...s, padding:"14px 18px", display:"flex", flexDirection:"column", gap:8, justifyContent:"center" }}>
+    {[true, false, false].map((checked, i) => (
+      <div key={i} style={{ display:"flex", alignItems:"center", gap:8, opacity: i === 2 ? 0.55 : 1 }}>
+        <div style={{
+          width:12, height:12, borderRadius:3,
+          border:`1px solid ${checked ? T.accent : T.border}`,
+          background: checked ? T.accent : "transparent",
+          position:"relative",
+          flexShrink:0,
+        }}>
+          {checked ? <div style={{ position:"absolute", inset:3, borderRight:"1.5px solid #fff", borderBottom:"1.5px solid #fff", transform:"rotate(45deg)" }} /> : null}
+        </div>
+        <div style={{ height:5, background:T.block, borderRadius:2, width: i === 1 ? "70%" : "82%" }} />
+      </div>
+    ))}
+  </div>;
+}
+
+function ThumbRadioGroup() {
+  return <div style={{ ...s, padding:"12px 16px", display:"flex", flexDirection:"column", gap:6, justifyContent:"center" }}>
+    {[true, false, false].map((active, i) => (
+      <div key={i} style={{
+        display:"flex", alignItems:"center", gap:8,
+        border:`1px solid ${active ? T.accent : T.border}`,
+        borderRadius:6, padding:"6px 8px",
+        background: active ? T.adim : "transparent",
+      }}>
+        <div style={{
+          width:12, height:12, borderRadius:"50%",
+          border:`1px solid ${active ? T.accent : T.border}`,
+          display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0,
+        }}>
+          {active ? <div style={{ width:5, height:5, borderRadius:"50%", background:T.accent }} /> : null}
+        </div>
+        <div style={{ flex:1, display:"flex", flexDirection:"column", gap:3 }}>
+          <div style={{ height:4, background:T.block, borderRadius:2, width: i === 0 ? "45%" : "58%" }} />
+          <div style={{ height:3, background:T.block, borderRadius:2, width: "76%", opacity:.7 }} />
+        </div>
+      </div>
+    ))}
+  </div>;
+}
+
+function ThumbTagInput() {
+  return <div style={{ ...s, padding:"14px 16px", display:"flex", alignItems:"center", justifyContent:"center" }}>
+    <div style={{ width:"88%", border:`1px solid ${T.border}`, borderRadius:8, padding:"8px 8px", display:"flex", flexWrap:"wrap", gap:5, alignItems:"center" }}>
+      {["Design", "CSS"].map((tag) => (
+        <div key={tag} style={{
+          fontFamily:"var(--font-mono)", fontSize:8,
+          padding:"3px 7px", borderRadius:100,
+          background:T.adim, color:T.accent,
+          border:"1px solid rgba(17,17,17,.2)",
+        }}>{tag}</div>
+      ))}
+      <div style={{ height:5, background:T.block, borderRadius:2, width:44 }} />
+    </div>
+  </div>;
+}
+
+function ThumbDivider() {
+  return <div style={{ ...s, padding:"12px 16px", display:"flex", flexDirection:"column", gap:10, justifyContent:"center" }}>
+    <div style={{ height:1, background:T.border }} />
+    <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+      <div style={{ flex:1, height:1, background:T.border }} />
+      <span style={{ fontFamily:"var(--font-mono)", fontSize:8, color:T.muted }}>or</span>
+      <div style={{ flex:1, height:1, background:T.border }} />
+    </div>
+    <div style={{ display:"flex", alignItems:"center", justifyContent:"center", gap:10 }}>
+      <div style={{ height:5, width:28, background:T.block, borderRadius:2 }} />
+      <div style={{ width:1, height:14, background:T.border }} />
+      <div style={{ height:5, width:28, background:T.block, borderRadius:2 }} />
+      <div style={{ width:1, height:14, background:T.border }} />
+      <div style={{ height:5, width:28, background:T.block, borderRadius:2 }} />
+    </div>
+  </div>;
+}
+
 /* ── NAVIGATION ─────────────────────────────── */
 function ThumbStickyHeader() {
   return <div style={{ ...s, display:"flex", flexDirection:"column" }}>
@@ -800,6 +878,16 @@ export const blockThumbMap: Record<string, () => React.ReactElement> = {
   u12: ThumbPagination,
   u13: ThumbDarkToggle,
   u14: ThumbKodBlok,
+  u15: ThumbCheckboxGroup,
+  u16: ThumbRadioGroup,
+  u17: ThumbProgress,
+  u18: ThumbPagination,
+  u19: ThumbInput,
+  u20: ThumbTagInput,
+  u21: ThumbTooltip,
+  u22: ThumbBreadcrumb,
+  u23: ThumbKodBlok,
+  u24: ThumbDivider,
   // ikonlar
   i1: Thumb12Kolon,
   i2: () => { const I = () => { const icons = ["M4 6h16M4 12h16M4 18h16","M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z","M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8","M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z","M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z","M12 5v14M5 12h14","M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9","M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87"]; return <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", background:T.border, gap:1, height:"100%" }}>{icons.map((d,i)=><div key={i} style={{ background:T.bg, display:"flex", alignItems:"center", justifyContent:"center" }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={T.muted} strokeWidth="1.5" strokeLinecap="round"><path d={d}/></svg></div>)}</div>; }; return <I/>; },
@@ -828,6 +916,25 @@ export const blockThumbMap: Record<string, () => React.ReactElement> = {
   f6: ThumbWizard,
   f7: ThumbFiltre,
   f8: ThumbInput,
+  f9: ThumbInput,
+  f10: ThumbDragDrop,
+  f11: ThumbWizard,
+  f12: ThumbInput,
+  f13: ThumbInput,
+  f14: ThumbBadge,
+  f15: ThumbInput,
+  f16: ThumbInput,
+  // hero-sections
+  hs1: ThumbCentered,
+  hs2: ThumbSplit,
+  hs3: ThumbGlassKart,
+  hs4: ThumbDashboard,
+  hs5: ThumbBadge,
+  hs6: ThumbTypeScale,
+  hs7: ThumbSplit,
+  hs8: ThumbGradient,
+  hs9: ThumbDashboard,
+  hs10: ThumbInput,
   // navigation
   n1: ThumbStickyHeader,
   n2: ThumbStickySidebar,
@@ -850,6 +957,14 @@ export const blockThumbMap: Record<string, () => React.ReactElement> = {
   ka6: ThumbGlassKart,
   ka7: ThumbFlipKart,
   ka8: ThumbBlogKart,
+  c9: ThumbProfilKart,
+  c10: ThumbUrunKart,
+  c11: ThumbDashboard,
+  c12: ThumbBlogKart,
+  c13: ThumbUrunKart,
+  c14: ThumbProfilKart,
+  c15: ThumbToast,
+  c16: ThumbBento,
   // data
   v1: ThumbBarChart,
   v2: ThumbLineChart,
