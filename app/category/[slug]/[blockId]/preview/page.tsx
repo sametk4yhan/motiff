@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import BlockThumb from "@/components/BlockThumb";
 import { getBlockFromCategory, getCategoryBySlug } from "@/data/catalog";
 
 export async function generateMetadata({
@@ -35,16 +34,18 @@ export default async function BlockPreviewPage({
     notFound();
   }
 
+  const iframeSrc = `/api/block-preview/${slug}/${blockId}`;
+
   return (
     <main
       style={{
         minHeight: "100vh",
-        padding: "clamp(16px, 3vw, 28px)",
+        padding: "clamp(14px, 2.5vw, 24px)",
         background:
           "radial-gradient(circle at top left, rgba(17,17,17,.16), transparent 22%), radial-gradient(circle at bottom right, rgba(17,17,17,.08), transparent 26%), linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%)",
       }}
     >
-      <div style={{ maxWidth: 1320, margin: "0 auto" }}>
+      <div style={{ maxWidth: 1160, margin: "0 auto" }}>
         <div
           style={{
             display: "flex",
@@ -125,34 +126,35 @@ export default async function BlockPreviewPage({
         <section
           style={{
             border: "1px solid rgba(17,17,17,0.08)",
-            borderRadius: 28,
+            borderRadius: 22,
             background: "rgba(255,255,255,0.76)",
             backdropFilter: "blur(16px)",
-            boxShadow: "0 32px 90px rgba(17,17,17,0.08)",
+            boxShadow: "0 24px 64px rgba(17,17,17,0.08)",
             overflow: "hidden",
           }}
         >
           <div
             style={{
-              aspectRatio: "16 / 10",
-              padding: "clamp(16px, 2vw, 24px)",
+              padding: "clamp(12px, 1.8vw, 18px)",
               background:
                 "radial-gradient(circle at top left, rgba(17,17,17,.08), transparent 26%), radial-gradient(circle at bottom right, rgba(17,17,17,.06), transparent 28%), linear-gradient(180deg, rgba(247,247,247,0.88), rgba(239,239,239,0.82))",
             }}
           >
-            <div
+            <iframe
+              src={iframeSrc}
+              title={`${block.title} live preview`}
+              loading="lazy"
               style={{
                 width: "100%",
-                height: "100%",
-                borderRadius: 24,
+                height: "min(70vh, 760px)",
+                minHeight: 460,
+                borderRadius: 16,
                 overflow: "hidden",
                 border: "1px solid rgba(17,17,17,0.12)",
                 background: "rgba(255,255,255,0.88)",
-                boxShadow: "0 40px 100px rgba(17,17,17,0.12)",
+                boxShadow: "0 24px 56px rgba(17,17,17,0.12)",
               }}
-            >
-              <BlockThumb blockId={block.id} zoom={1.28} offsetY="44%" />
-            </div>
+            />
           </div>
         </section>
       </div>

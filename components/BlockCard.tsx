@@ -106,7 +106,7 @@ export default function BlockCard({
             background: "rgba(255,255,255,0.9)",
           }}
         >
-          <BlockThumb blockId={block.id} zoom={1.42} offsetY="42%" />
+          <BlockThumb blockId={block.id} zoom={1} offsetY="50%" />
         </div>
       </div>
 
