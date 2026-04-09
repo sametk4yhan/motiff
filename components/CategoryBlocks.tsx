@@ -18,7 +18,6 @@ export default function CategoryBlocks({
   blocks: Block[];
   categorySlug: string;
 }) {
-  const CURATED_LIMIT = 12;
   const [query, setQuery] = useState("");
   const [selectedLang, setSelectedLang] = useState<"all" | NonNullable<Block["lang"]>>("all");
   const [selectedTag, setSelectedTag] = useState<string>("all");
@@ -62,7 +61,7 @@ export default function CategoryBlocks({
   }, [blocks, deferredQuery, selectedLang, selectedTag]);
 
   const hasActiveFilters = Boolean(query.trim()) || selectedLang !== "all" || selectedTag !== "all";
-  const visibleBlocks = hasActiveFilters ? filteredBlocks : filteredBlocks.slice(0, CURATED_LIMIT);
+  const visibleBlocks = filteredBlocks;
 
   return (
     <>
@@ -107,7 +106,7 @@ export default function CategoryBlocks({
         >
           {hasActiveFilters
             ? `${filteredBlocks.length} matches`
-            : `${visibleBlocks.length} / ${blocks.length} shown`}
+            : `${visibleBlocks.length} shown`}
         </div>
       </div>
 
